@@ -29,16 +29,12 @@ router.beforeEach((to, from, next) => {
   const store = usePaymentStore();
 
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    // Проверяем, аутентифицирован ли пользователь
     if (!store.accessCheck) {
-      // Если не аутентифицирован, перенаправляем на страницу входа
       next("/");
     } else {
-      // Если аутентифицирован, переходим на запрашиваемую страницу
       next();
     }
   } else {
-    // Если страница не требует аутентификации, переходим на неё
     next();
   }
 });
