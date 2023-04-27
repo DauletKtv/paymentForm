@@ -38,10 +38,8 @@ export const usePaymentStore = defineStore("payment", () => {
   }
 
   function cardNameHolderChange(val) {
-    console.log(val.toString().replace(/[^a-zA-Z]/g, ""));
     const filteredValue = val;
     nameHolder.value = filteredValue;
-    console.log(nameHolder.value);
   }
 
   function sendData() {
@@ -57,7 +55,6 @@ export const usePaymentStore = defineStore("payment", () => {
       cvc: cvc.value,
       email: email.value,
     };
-    console.log(data);
     Object.keys(data).forEach((element) => {
       if (data[element] == "") {
         valid = false;
@@ -77,7 +74,6 @@ export const usePaymentStore = defineStore("payment", () => {
         errorText.value = "Заполните корректно поля!";
       }
     });
-    console.log(valid);
     loading.value = true;
 
     const myPromise = new Promise((resolve, reject) => {

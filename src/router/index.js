@@ -25,17 +25,13 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from) => {
   const store = usePaymentStore();
 
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!store.accessCheck) {
-      next("/");
-    } else {
-      next();
-    }
-  } else {
-    next();
+  if (to.name == "about" && store.accessCheck) {
+    return true;
+  } else if (to.name !== "home") {
+    return { name: "home" };
   }
 });
 
